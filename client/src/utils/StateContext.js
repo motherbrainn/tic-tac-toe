@@ -12,11 +12,12 @@ export const StateProvider = ({ children }) => {
     [0, 0, 0],
     [0, 0, 0],
   ]);
-
+  const [playerTurn, setPlayerTurn] = useState();
   const state = {
     board: [boardState, setBoardState],
+    playerTurn: [playerTurn, setPlayerTurn],
   };
-  console.log(state.board);
+  console.log(state);
   return (
     <StateContext.Provider value={state}>{children}</StateContext.Provider>
   );
