@@ -1,14 +1,12 @@
 import "./App.css";
 import Board from "./components/Board";
-import { StateProvider } from "./utils/StateContext";
+//import { StateProvider } from "./utils/StateContext";
 
 function App() {
   return (
-    <StateProvider>
       <div>
         <Board />
       </div>
-    </StateProvider>
   );
 }
 

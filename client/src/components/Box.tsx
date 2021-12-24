@@ -1,7 +1,8 @@
-import React from "react";
 import styled from "styled-components";
-import { useContextState } from "../utils/StateContext";
 import { socket } from "../connection/socket";
+import {connect} from 'react-redux'
+import { setBoardState} from '../redux/Board/board.actions'
+
 
 const StyledBox = styled.div`
   width: 100px;
@@ -12,23 +13,32 @@ const StyledBox = styled.div`
   border-radius: 5px;
 `;
 
-const Box = ({ rowId, columnId }) => {
-  const state = useContextState();
-  const onClickHandler = () => {
-    const copyOfBoard = [...state.board[0]];
-    copyOfBoard[rowId][columnId] = "x";
-
+const Box = (props) => {
+  
+  const onClickHandler = (rowId, columnId) => {
     //emit the state we want to update up to the server
     //then send state down to clients
     //clients should listen for event from server and set state
-    socket.emit("update-board-client", copyOfBoard);
+    //socket.emit("update-board-client", 'copyOfBoard');
     socket.emit("player-turn-taken-client", socket.id);
+    props.setGameBoardState(rowId,columnId)
   };
   return (
-    <StyledBox onClick={() => onClickHandler()}>
-      {state.board[0][rowId][columnId]}
+    <StyledBox onClick={() => onClickHandler(props.rowId, props.columnId)}>
+      {props.state.boardReducer[props.rowId][props.columnId]}
     </StyledBox>
   );
 };
+const mapStateToProps = state => {
+  return{
+   state
+  }
+}
 
-export default Box;
+const mapDispatchToProps = dispatch => {
+  return {
+    setGameBoardState: (rowId, columnId) => dispatch(setBoardState(rowId, columnId)),
+
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Box);
