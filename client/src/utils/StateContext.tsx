@@ -1,6 +1,6 @@
-import { React, useState, createContext, useContext } from "react";
+import { useState, createContext, useContext } from "react";
 
-const StateContext = createContext();
+const StateContext = createContext('Default Value');
 
 export const useContextState = () => {
   return useContext(StateContext);

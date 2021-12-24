@@ -1,4 +1,4 @@
-const turnDecider = (currentPlayerId, playerArray) => {
+export const turnDecider = (currentPlayerId: number, playerArray: number[]) => {
   const nextPlayerIndex =
     playerArray.findIndex((e) => e === currentPlayerId) + 1;
 

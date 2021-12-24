@@ -1,8 +1,7 @@
-import { React, useEffect } from "react";
 import BoardRow from "./BoardRow";
 import styled from "styled-components";
 import { socket } from "../connection/socket";
-import { StateProvider, useContextState } from "../utils/StateContext";
+import { useContextState } from "../utils/StateContext";
 
 const StyledBoard = styled.div``;
 
