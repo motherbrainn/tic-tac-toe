@@ -8,10 +8,11 @@ const StyledBoard = styled.div``;
 
 const Board = (props) => {
   // socket.on("update-board-server", (string) => state.board[1](string));
-  socket.on("update-board-server", (string) => props.setGameBoardState());
+  socket.once("update-board-server", (rowId, columnId) => props.setGameBoardState(rowId, columnId));
   // socket.on("player-turn-taken-server", (string) =>
   //   state.playerTurn[1](string)
   // );
+  console.log(props)
   return (
     <StyledBoard>
       <BoardRow rowId={0} />
