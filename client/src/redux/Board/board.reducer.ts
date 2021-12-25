@@ -9,6 +9,7 @@ const INITIAL_STATE = [
 const reducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
     case SET_GAME_BOARD_STATE:
+      console.log("reducer called");
       const copyOfBoardState = [...state];
       copyOfBoardState[action.payload.rowId][action.payload.columnId] = 1;
       return copyOfBoardState;
