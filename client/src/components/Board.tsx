@@ -3,16 +3,22 @@ import styled from "styled-components";
 import { socket } from "../connection/socket";
 import {connect} from 'react-redux'
 import { setBoardState} from '../redux/Board/board.actions'
+import { createPlayer } from '../redux/Player/player.actions'
 import { useEffect } from "react";
 
-const StyledBoard = styled.div``;
+const StyledBoard = styled.div`
+display: flex
+flex-wrap: wrap
+`;
 
 const Board = (props) => {
   // socket.on("update-board-server", (string) => state.board[1](string));
   useEffect(() => {
+    console.log(props)
     socket.on("update-board-server", (rowId, columnId) => props.setGameBoardState(rowId, columnId));
+    socket.on('player-connect', (playerId) => props.createPlayer())
   },[])
-   
+  useEffect(() => console.log('state:', props.state))
   //socket.on("update-board-server", (rowId, columnId) => console.log('rowId: ', rowId));
 
   // socket.on("player-turn-taken-server", (string) =>
@@ -36,6 +42,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setGameBoardState: (rowId, columnId) => dispatch(setBoardState(rowId, columnId)),
+    createPlayer: (playerId) => dispatch(createPlayer(playerId))
 
   }
 }

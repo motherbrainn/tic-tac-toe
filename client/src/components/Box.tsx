@@ -5,12 +5,12 @@ import { setBoardState} from '../redux/Board/board.actions'
 
 
 const StyledBox = styled.div`
-  width: 100px;
-  height: 100px;
-  margin: 10px;
+  width: 150px;
+  height: 150px;
+  margin: 1px;
   background-color: grey;
   color: black;
-  border-radius: 5px;
+  border-radius: 3px;
 `;
 
 const Box = (props) => {

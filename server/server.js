@@ -5,6 +5,7 @@ const io = require("socket.io")(8080, {
 });
 
 io.on("connection", (socket) => {
+  io.emit("player-connect", socket.id);
   console.log(socket.id);
   socket.on("update-board-client", (rowId, columnId) =>
     io.emit("update-board-server", rowId, columnId)
