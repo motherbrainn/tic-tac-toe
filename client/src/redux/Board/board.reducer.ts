@@ -11,7 +11,8 @@ const reducer = (state = INITIAL_STATE, action: any) => {
     case SET_GAME_BOARD_STATE:
       console.log("reducer called");
       const copyOfBoardState = [...state];
-      copyOfBoardState[action.payload.rowId][action.payload.columnId] = 1;
+      copyOfBoardState[action.payload.rowId][action.payload.columnId] =
+        action.payload.socketId;
       return copyOfBoardState;
     default:
       return state;

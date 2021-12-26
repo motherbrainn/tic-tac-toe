@@ -14,7 +14,7 @@ flex-wrap: wrap
 const Board = (props) => {
   // socket.on("update-board-server", (string) => state.board[1](string));
   useEffect(() => {
-    socket.on("update-board-server", (rowId, columnId) => props.setGameBoardState(rowId, columnId));
+    socket.on("update-board-server", (rowId, columnId, socketId) => props.setGameBoardState(rowId, columnId, socketId));
     socket.on('player-connect', (playerId) => props.createPlayer(playerId))
   },[])
   //socket.on("update-board-server", (rowId, columnId) => console.log('rowId: ', rowId));
@@ -39,7 +39,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setGameBoardState: (rowId, columnId) => dispatch(setBoardState(rowId, columnId)),
+    setGameBoardState: (rowId: number, columnId: number, socketId: number) => dispatch(setBoardState(rowId, columnId, socketId)),
     createPlayer: (playerId: number) => dispatch(createPlayer(playerId))
 
   }

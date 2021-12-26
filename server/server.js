@@ -8,7 +8,7 @@ io.on("connection", (socket) => {
   io.emit("player-connect", socket.id);
   console.log(socket.id);
   socket.on("update-board-client", (rowId, columnId) =>
-    io.emit("update-board-server", rowId, columnId)
+    io.emit("update-board-server", rowId, columnId, socket.id)
   );
 
   // socket.on("player-turn-taken-client", (string) =>

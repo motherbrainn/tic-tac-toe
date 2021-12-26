@@ -11,11 +11,12 @@ const StyledBox = styled.div`
   background-color: grey;
   color: black;
   border-radius: 3px;
+  text-align: center;
 `;
 
 const Box = (props) => {
   
-  const onClickHandler = (rowId, columnId) => {
+  const onClickHandler = (rowId: number, columnId: number) => {
     //emit the state we want to update up to the server
     //then send state down to clients
     //clients should listen for event from server and set state
@@ -37,7 +38,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setGameBoardState: (rowId, columnId) => dispatch(setBoardState(rowId, columnId)),
+    setGameBoardState: (rowId: number, columnId: number) => dispatch(setBoardState(rowId, columnId)),
 
   }
 }
