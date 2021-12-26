@@ -14,13 +14,11 @@ flex-wrap: wrap
 const Board = (props) => {
   // socket.on("update-board-server", (string) => state.board[1](string));
   useEffect(() => {
-    console.log(props)
     socket.on("update-board-server", (rowId, columnId) => props.setGameBoardState(rowId, columnId));
-    socket.on('player-connect', (playerId) => props.createPlayer())
+    socket.on('player-connect', (playerId) => props.createPlayer(playerId))
   },[])
-  useEffect(() => console.log('state:', props.state))
   //socket.on("update-board-server", (rowId, columnId) => console.log('rowId: ', rowId));
-
+useEffect(() => console.log(props.state))
   // socket.on("player-turn-taken-server", (string) =>
   //   state.playerTurn[1](string)
   // );
@@ -42,7 +40,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setGameBoardState: (rowId, columnId) => dispatch(setBoardState(rowId, columnId)),
-    createPlayer: (playerId) => dispatch(createPlayer(playerId))
+    createPlayer: (playerId: number) => dispatch(createPlayer(playerId))
 
   }
 }
