@@ -1,4 +1,8 @@
-import { SET_GAME_BOARD_STATE, CREATE_PLAYER } from "./board.types";
+import {
+  SET_GAME_BOARD_STATE,
+  CREATE_PLAYER,
+  SET_ACTIVE_TURN,
+} from "./board.types";
 import { checkForWinner } from "../../utils/utilityFunctions";
 import { Player } from "../../classes/player";
 
@@ -9,6 +13,7 @@ const INITIAL_STATE = {
     [0, 0, 0],
   ],
   playerState: [],
+  activeTurn: 0,
 };
 
 const reducer = (state = INITIAL_STATE, action: any) => {
@@ -17,7 +22,7 @@ const reducer = (state = INITIAL_STATE, action: any) => {
       const copyOfBoardState = [...state.boardState];
       copyOfBoardState[action.payload.rowId][action.payload.columnId] =
         action.payload.socketId;
-      checkForWinner(state.playerState, state.boardState);
+      checkForWinner(state.boardState);
       return { ...state, boardState: copyOfBoardState };
     case CREATE_PLAYER:
       return {
@@ -26,6 +31,11 @@ const reducer = (state = INITIAL_STATE, action: any) => {
           ...state.playerState,
           new Player(action.payload.playerId),
         ],
+      };
+    case SET_ACTIVE_TURN:
+      return {
+        ...state,
+        activeTurn: action.payload.playerId,
       };
     default:
       return state;

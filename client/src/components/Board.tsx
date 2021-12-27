@@ -2,7 +2,7 @@ import BoardRow from "./BoardRow";
 import styled from "styled-components";
 import { socket } from "../connection/socket";
 import {connect} from 'react-redux'
-import { setBoardState, createPlayer} from '../redux/Board/board.actions'
+import { setBoardState, createPlayer,setActiveTurn} from '../redux/Board/board.actions'
 import { useEffect } from "react";
 
 const StyledBoard = styled.div`
@@ -11,16 +11,13 @@ flex-wrap: wrap
 `;
 
 const Board = (props) => {
-  // socket.on("update-board-server", (string) => state.board[1](string));
   useEffect(() => {
     socket.on("update-board-server", (rowId, columnId, socketId) => props.setGameBoardState(rowId, columnId, socketId));
-    socket.on('player-connect', (playerId) => props.createPlayer(playerId))
+    socket.on('player-connect', (playerId) => {props.createPlayer(playerId); props.setActiveTurn(playerId)})
   },[])
-  //socket.on("update-board-server", (rowId, columnId) => console.log('rowId: ', rowId));
+
 useEffect(() => console.log(props.state))
-  // socket.on("player-turn-taken-server", (string) =>
-  //   state.playerTurn[1](string)
-  // );
+
   return (
     <StyledBoard>
       <BoardRow rowId={0} />
@@ -39,7 +36,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setGameBoardState: (rowId: number, columnId: number, socketId: number) => dispatch(setBoardState(rowId, columnId, socketId)),
-    createPlayer: (playerId: number) => dispatch(createPlayer(playerId))
+    createPlayer: (playerId: number) => dispatch(createPlayer(playerId)),
+    setActiveTurn: (playerId: number) => dispatch(setActiveTurn(playerId))
 
   }
 }

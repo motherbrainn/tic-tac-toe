@@ -11,7 +11,8 @@ export const turnDecider = (currentPlayerId: number, playerArray: number[]) => {
   }
 };
 
-export const checkForWinner = (playerArray: Player[], boardState) => {
+//returns id of winning player
+export const checkForWinner = (boardState): number => {
   console.log(boardState);
   //horizontal wins
   if (
