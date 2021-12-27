@@ -2,8 +2,7 @@ import BoardRow from "./BoardRow";
 import styled from "styled-components";
 import { socket } from "../connection/socket";
 import {connect} from 'react-redux'
-import { setBoardState} from '../redux/Board/board.actions'
-import { createPlayer } from '../redux/Player/player.actions'
+import { setBoardState, createPlayer} from '../redux/Board/board.actions'
 import { useEffect } from "react";
 
 const StyledBoard = styled.div`

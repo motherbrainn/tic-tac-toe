@@ -1,1 +1,2 @@
 export const SET_GAME_BOARD_STATE = "SET_GAME_BOARD_STATE";
+export const CREATE_PLAYER = "CREATE_PLAYER";

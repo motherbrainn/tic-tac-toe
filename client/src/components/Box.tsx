@@ -23,10 +23,11 @@ const Box = (props) => {
      socket.emit("update-board-client", rowId, columnId);
     socket.emit("player-turn-taken-client", socket.id);
     //props.setGameBoardState(rowId,columnId)
+    console.log(props.state.boardReducer.boardState)
   };
   return (
     <StyledBox onClick={() => onClickHandler(props.rowId, props.columnId)}>
-      {props.state.boardReducer[props.rowId][props.columnId]}
+      {props.state.boardReducer.boardState[props.rowId][props.columnId]}
     </StyledBox>
   );
 };
