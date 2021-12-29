@@ -1,6 +1,9 @@
+const { instrument } = require("@socket.io/admin-ui");
+
 const io = require("socket.io")(8080, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "https://admin.socket.io"],
+    credentials: true,
   },
 });
 
@@ -10,8 +13,6 @@ io.on("connection", (socket) => {
   socket.on("update-board-client", (rowId, columnId) =>
     io.emit("update-board-server", rowId, columnId, socket.id)
   );
-
-  // socket.on("player-turn-taken-client", (string) =>
-  //   socket.emit("player-turn-taken-server", string)
-  // );
 });
+
+instrument(io, { auth: false });
