@@ -1,12 +1,21 @@
 import { connect } from "react-redux";
 import { socket } from "../connection/socket";
 import { StateType } from "../types";
+import styled from "styled-components";
 
 const JoinGame = () => {
+  const StyledJoinGameButton = styled.button`
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  `;
+
   const onJoinGameHandler = () => {};
   return (
     <div>
-      <button onClick={onJoinGameHandler}>Search for game..</button>
+      <StyledJoinGameButton onClick={onJoinGameHandler}>
+        Search for game..
+      </StyledJoinGameButton>
     </div>
   );
 };
