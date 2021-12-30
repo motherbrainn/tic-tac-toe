@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Board from "./Board";
 import JoinGame from "./JoinGame";
 import { connect } from "react-redux";
+import { StateType } from "../types";
 
 const StyledMain = styled.div`
 display: flex
@@ -11,12 +12,12 @@ const Main = (props) => {
   return (
     <StyledMain>
       {props.state.boardReducer.room === "" && <JoinGame />}
-      {props.state.boardReducer.room && <Board />}
+      {props.state.boardReducer.room === "" && <Board />}
     </StyledMain>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StateType) => {
   return {
     state,
   };

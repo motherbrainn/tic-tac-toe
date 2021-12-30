@@ -6,8 +6,9 @@ import {
 } from "./board.types";
 import { checkForWinner } from "../../utils/utilityFunctions";
 import { Player } from "../../classes/player";
+import { StateType } from "../../types";
 
-const INITIAL_STATE = {
+const INITIAL_STATE: StateType = {
   room: "",
   boardState: [
     [0, 0, 0],
@@ -15,7 +16,7 @@ const INITIAL_STATE = {
     [0, 0, 0],
   ],
   playerState: [],
-  activeTurn: 0,
+  activeTurn: "",
 };
 
 const reducer = (state = INITIAL_STATE, action: any) => {

@@ -1,10 +1,9 @@
 import { connect } from "react-redux";
 import { socket } from "../connection/socket";
+import { StateType } from "../types";
 
 const JoinGame = () => {
-  const onJoinGameHandler = () => {
-    //join room
-  };
+  const onJoinGameHandler = () => {};
   return (
     <div>
       <p>Tic Tac Toe</p>
@@ -13,7 +12,7 @@ const JoinGame = () => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StateType) => {
   return {
     state,
   };
