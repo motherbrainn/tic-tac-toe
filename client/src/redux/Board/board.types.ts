@@ -1,3 +1,4 @@
 export const SET_GAME_BOARD_STATE = "SET_GAME_BOARD_STATE";
 export const CREATE_PLAYER = "CREATE_PLAYER";
 export const SET_ACTIVE_TURN = "SET_ACTIVE_TURN";
+export const SET_ROOM = "SET_ROOM";

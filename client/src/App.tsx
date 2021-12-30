@@ -1,11 +1,10 @@
 import "./App.css";
-import Board from "./components/Board";
-//import { StateProvider } from "./utils/StateContext";
+import Main from "./components/Main";
 
 function App() {
   return (
       <div>
-        <Board />
+        <Main />
       </div>
   );
 }

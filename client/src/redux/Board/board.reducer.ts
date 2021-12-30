@@ -2,11 +2,13 @@ import {
   SET_GAME_BOARD_STATE,
   CREATE_PLAYER,
   SET_ACTIVE_TURN,
+  SET_ROOM,
 } from "./board.types";
 import { checkForWinner } from "../../utils/utilityFunctions";
 import { Player } from "../../classes/player";
 
 const INITIAL_STATE = {
+  room: "",
   boardState: [
     [0, 0, 0],
     [0, 0, 0],
@@ -36,6 +38,11 @@ const reducer = (state = INITIAL_STATE, action: any) => {
       return {
         ...state,
         activeTurn: action.payload.playerId,
+      };
+    case SET_ROOM:
+      return {
+        ...state,
+        room: action.payload.room,
       };
     default:
       return state;
