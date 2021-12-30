@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Board from "./Board";
 import JoinGame from "./JoinGame";
+import Header from "./Header";
 import { connect } from "react-redux";
 import { StateType } from "../types";
 
@@ -11,6 +12,7 @@ flex-wrap: wrap`;
 const Main = (props) => {
   return (
     <StyledMain>
+      <Header />
       {props.state.boardReducer.room === "" && <JoinGame />}
       {props.state.boardReducer.room === "" && <Board />}
     </StyledMain>

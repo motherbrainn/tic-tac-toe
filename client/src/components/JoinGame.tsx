@@ -6,7 +6,6 @@ const JoinGame = () => {
   const onJoinGameHandler = () => {};
   return (
     <div>
-      <p>Tic Tac Toe</p>
       <button onClick={onJoinGameHandler}>Search for game..</button>
     </div>
   );

@@ -5,6 +5,7 @@ export interface StateType {
   activeTurn: string;
 }
 
+//this type is not right
 export interface DispatchType {
   setGameBoardState?: (
     rowId: number,
