@@ -11,19 +11,26 @@ const activeRooms = (io) => {
   return res;
 };
 
+/**
+ *
+ * @param {*} io
+ * @param {*} socket
+ * @returns roomId of joined room
+ */
 const joinOrCreateRoom = (io, socket) => {
   const roomsWaitingForMatch = activeRooms(io).filter(
     (e) => io.sockets.adapter.rooms.get(e).size === 1
   );
   if (roomsWaitingForMatch.length < 1) {
-    const newRoomId = Math.random();
+    const newRoomId = Math.random().toString().substring(2);
     console.log("no rooms to join, creating new room: ", newRoomId);
     socket.join(newRoomId);
-    return roomsWaitingForMatch;
+    return newRoomId;
   }
   //join first room waiting for match
   console.log("joining room..: ", roomsWaitingForMatch);
   socket.join(roomsWaitingForMatch[0]);
+  return roomsWaitingForMatch[0];
 };
 
 module.exports = { joinOrCreateRoom };

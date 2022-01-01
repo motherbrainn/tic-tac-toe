@@ -9,7 +9,7 @@ import { Player } from "../../classes/player";
 import { StateType } from "../../types";
 
 const INITIAL_STATE: StateType = {
-  room: "",
+  roomId: "",
   boardState: [
     [0, 0, 0],
     [0, 0, 0],
@@ -43,7 +43,7 @@ const reducer = (state = INITIAL_STATE, action: any) => {
     case SET_ROOM:
       return {
         ...state,
-        room: action.payload.room,
+        roomId: action.payload.roomId,
       };
     default:
       return state;

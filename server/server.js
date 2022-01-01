@@ -17,8 +17,9 @@ io.on("connection", (socket) => {
   );
 
   socket.on("join-room-client", () => {
-    //socket.join("new-room");
-    joinOrCreateRoom(io, socket);
+    const joinedRoom = joinOrCreateRoom(io, socket);
+    console.log("room joined", joinedRoom);
+    socket.emit("join-room-server", joinedRoom);
   });
 });
 

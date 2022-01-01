@@ -1,5 +1,5 @@
 export interface StateType {
-  room: string;
+  roomId: string;
   boardState: [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
   playerState: [];
   activeTurn: string;

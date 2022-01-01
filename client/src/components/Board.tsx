@@ -20,10 +20,6 @@ const Board = (props) => {
     socket.on("update-board-server", (rowId, columnId, socketId) =>
       props.setGameBoardState(rowId, columnId, socketId)
     );
-    socket.on("player-connect", (playerId) => {
-      props.createPlayer(playerId);
-      props.setActiveTurn(playerId);
-    });
   }, []);
 
   useEffect(() => console.log(props.state));

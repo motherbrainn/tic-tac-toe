@@ -3,13 +3,13 @@ import { socket } from "../connection/socket";
 import { StateType } from "../types";
 import styled from "styled-components";
 
-const JoinGame = () => {
-  const StyledJoinGameButton = styled.button`
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-  `;
+const StyledJoinGameButton = styled.button`
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
+const JoinGame = () => {
   const onJoinGameHandler = () => {
     socket.emit("join-room-client");
   };
