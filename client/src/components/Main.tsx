@@ -10,6 +10,7 @@ import {
   setRoom,
   createPlayer,
   setActiveTurn,
+  setPlayers,
 } from "../redux/Board/board.actions";
 
 const StyledMain = styled.div`
@@ -19,11 +20,18 @@ flex-wrap: wrap`;
 const Main = (props) => {
   useEffect(() => console.log(props.state.boardReducer.roomId.length));
   useEffect(() => {
-    socket.on("join-room-server", (roomId) => props.setRoom(roomId));
+    socket.on("join-room-server", (roomId, players, activeTurn) => {
+      props.setRoom(roomId);
+      props.setPlayers(players);
+      props.setActiveTurn(activeTurn);
+    });
+    socket.on("room-joined-server", (players, activeTurn) => {
+      props.setPlayers(players);
+      props.setActiveTurn(activeTurn);
+    });
     socket.on("player-connect", (playerId) => {
       console.log("connect");
-      props.createPlayer(playerId);
-      props.setActiveTurn(playerId);
+      //props.createPlayer(playerId);
     });
   }, []);
   return (
@@ -49,8 +57,9 @@ const mapStateToProps = (state: StateType) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setRoom: (roomId: string) => dispatch(setRoom(roomId)),
-    createPlayer: (playerId: number) => dispatch(createPlayer(playerId)),
-    setActiveTurn: (playerId: number) => dispatch(setActiveTurn(playerId)),
+    createPlayer: (playerId: string) => dispatch(createPlayer(playerId)),
+    setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
+    setPlayers: (playerId: string) => dispatch(setPlayers(playerId)),
   };
 };
 

@@ -9,6 +9,7 @@ import {
 } from "../redux/Board/board.actions";
 import { useEffect } from "react";
 import { StateType } from "../types";
+import { turnDecider } from "../utils/utilityFunctions";
 
 const StyledBoard = styled.div`
 display: flex
@@ -17,9 +18,12 @@ flex-wrap: wrap
 
 const Board = (props) => {
   useEffect(() => {
-    socket.on("update-board-server", (rowId, columnId, socketId) =>
-      props.setGameBoardState(rowId, columnId, socketId)
-    );
+    socket.on("update-board-server", (rowId, columnId, socketId) => {
+      props.setGameBoardState(rowId, columnId, socketId);
+      socket.on("player-turn-taken-server", (roomId, nextTurn) => {
+        props.setActiveTurn(nextTurn);
+      });
+    });
   }, []);
 
   useEffect(() => console.log(props.state));
@@ -43,8 +47,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setGameBoardState: (rowId: number, columnId: number, socketId: number) =>
       dispatch(setBoardState(rowId, columnId, socketId)),
-    createPlayer: (playerId: number) => dispatch(createPlayer(playerId)),
-    setActiveTurn: (playerId: number) => dispatch(setActiveTurn(playerId)),
+    createPlayer: (playerId: string) => dispatch(createPlayer(playerId)),
+    setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
   };
 };
 

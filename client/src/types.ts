@@ -2,7 +2,7 @@ export interface StateType {
   roomId: string;
   boardState: [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
   playerState: [];
-  activeTurn: string;
+  activeTurn: string[];
 }
 
 //this type is not right

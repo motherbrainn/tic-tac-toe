@@ -3,6 +3,7 @@ import {
   CREATE_PLAYER,
   SET_ACTIVE_TURN,
   SET_ROOM,
+  SET_PLAYERS,
 } from "./board.types";
 import { checkForWinner } from "../../utils/utilityFunctions";
 import { Player } from "../../classes/player";
@@ -16,7 +17,7 @@ const INITIAL_STATE: StateType = {
     [0, 0, 0],
   ],
   playerState: [],
-  activeTurn: "",
+  activeTurn: [],
 };
 
 const reducer = (state = INITIAL_STATE, action: any) => {
@@ -34,6 +35,11 @@ const reducer = (state = INITIAL_STATE, action: any) => {
           ...state.playerState,
           new Player(action.payload.playerId),
         ],
+      };
+    case SET_PLAYERS:
+      return {
+        ...state,
+        playerState: action.payload.playerId,
       };
     case SET_ACTIVE_TURN:
       return {

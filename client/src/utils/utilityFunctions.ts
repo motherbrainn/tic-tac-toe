@@ -1,13 +1,11 @@
-import { Player } from "../classes/player";
-
-export const turnDecider = (currentPlayerId: number, playerArray: number[]) => {
+export const turnDecider = (currentPlayerId: string, playerArray: string[]) => {
   const nextPlayerIndex =
     playerArray.findIndex((e) => e === currentPlayerId) + 1;
 
   if (nextPlayerIndex > playerArray.length - 1) {
-    return 0;
+    return playerArray[0];
   } else {
-    return nextPlayerIndex;
+    return playerArray[nextPlayerIndex];
   }
 };
 
