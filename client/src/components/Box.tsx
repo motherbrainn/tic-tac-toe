@@ -19,7 +19,13 @@ const Box = (props) => {
     //emit the state we want to update up to the server
     //then send state down to clients
     //clients should listen for event from server and set state
-    socket.emit("update-board-client", rowId, columnId);
+    props.setGameBoardState(rowId, columnId, socket.id);
+    socket.emit(
+      "update-board-client",
+      rowId,
+      columnId,
+      props.state.boardReducer.roomId
+    );
     socket.emit("player-turn-taken-client", socket.id);
     //props.setGameBoardState(rowId,columnId)
     console.log(props.state.boardReducer.boardState);
@@ -38,8 +44,8 @@ const mapStateToProps = (state: StateType) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setGameBoardState: (rowId: number, columnId: number) =>
-      dispatch(setBoardState(rowId, columnId)),
+    setGameBoardState: (rowId: number, columnId: number, socketId: string) =>
+      dispatch(setBoardState(rowId, columnId, socketId)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Box);

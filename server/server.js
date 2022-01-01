@@ -12,13 +12,14 @@ const io = require("socket.io")(8080, {
 io.on("connection", (socket) => {
   io.emit("player-connect", socket.id);
   console.log(socket.id);
-  socket.on("update-board-client", (rowId, columnId) =>
-    io.emit("update-board-server", rowId, columnId, socket.id)
+  socket.on("update-board-client", (rowId, columnId, roomId) =>
+    socket.to(roomId).emit("update-board-server", rowId, columnId, socket.id)
   );
 
   socket.on("join-room-client", () => {
     const joinedRoom = joinOrCreateRoom(io, socket);
     console.log("room joined", joinedRoom);
+    //use socket.emit here to only set state for client that sent message
     socket.emit("join-room-server", joinedRoom);
   });
 });
