@@ -10,7 +10,9 @@ const JoinGame = () => {
     margin-right: auto;
   `;
 
-  const onJoinGameHandler = () => {};
+  const onJoinGameHandler = () => {
+    socket.emit("join-room-client");
+  };
   return (
     <div>
       <StyledJoinGameButton onClick={onJoinGameHandler}>
