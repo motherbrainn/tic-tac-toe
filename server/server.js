@@ -38,6 +38,10 @@ io.on("connection", (socket) => {
   socket.on("player-turn-taken-client", (roomId, nextTurn) =>
     socket.to(roomId).emit("player-turn-taken-server", roomId, nextTurn)
   );
+
+  socket.on("leave-room-client", (roomId) => {
+    socket.leave(roomId);
+  });
 });
 
 instrument(io, { auth: false });

@@ -4,6 +4,7 @@ import {
   SET_ACTIVE_TURN,
   SET_ROOM,
   SET_PLAYERS,
+  RESET_STATE,
 } from "./board.types";
 
 export const setBoardState = (
@@ -42,5 +43,11 @@ export const setPlayers = (playerId: string) => {
   return {
     type: SET_PLAYERS,
     payload: { playerId: playerId },
+  };
+};
+
+export const resetState = () => {
+  return {
+    type: RESET_STATE,
   };
 };

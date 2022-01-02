@@ -4,6 +4,7 @@ import {
   SET_ACTIVE_TURN,
   SET_ROOM,
   SET_PLAYERS,
+  RESET_STATE,
 } from "./board.types";
 import { checkForWinner } from "../../utils/utilityFunctions";
 import { Player } from "../../classes/player";
@@ -18,6 +19,7 @@ const INITIAL_STATE: StateType = {
   ],
   playerState: [],
   activeTurn: [],
+  winner: "",
 };
 
 const reducer = (state = INITIAL_STATE, action: any) => {
@@ -26,8 +28,11 @@ const reducer = (state = INITIAL_STATE, action: any) => {
       const copyOfBoardState = [...state.boardState];
       copyOfBoardState[action.payload.rowId][action.payload.columnId] =
         action.payload.socketId;
-      checkForWinner(state.boardState);
-      return { ...state, boardState: copyOfBoardState };
+      return {
+        ...state,
+        boardState: copyOfBoardState,
+        winner: checkForWinner(state.boardState),
+      };
     case CREATE_PLAYER:
       return {
         ...state,
@@ -50,6 +55,20 @@ const reducer = (state = INITIAL_STATE, action: any) => {
       return {
         ...state,
         roomId: action.payload.roomId,
+      };
+    case RESET_STATE:
+      console.log("resetting");
+      return {
+        ...state,
+        roomId: INITIAL_STATE.roomId,
+        boardState: [
+          [0, 0, 0],
+          [0, 0, 0],
+          [0, 0, 0],
+        ],
+        playerState: INITIAL_STATE.playerState,
+        activeTurn: INITIAL_STATE.activeTurn,
+        winner: INITIAL_STATE.winner,
       };
     default:
       return state;

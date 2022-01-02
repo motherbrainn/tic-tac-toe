@@ -9,7 +9,6 @@ import {
 } from "../redux/Board/board.actions";
 import { useEffect } from "react";
 import { StateType } from "../types";
-import { turnDecider } from "../utils/utilityFunctions";
 
 const StyledBoard = styled.div`
 display: flex

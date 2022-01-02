@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Board from "./Board";
 import JoinGame from "./JoinGame";
 import Header from "./Header";
+import PostGameScreen from "./PostGameScreen";
 import { connect } from "react-redux";
 import { StateType } from "../types";
 import { useEffect } from "react";
@@ -39,11 +40,19 @@ const Main = (props) => {
       <Header />
       {props.state.boardReducer.roomId.length === 0 && <JoinGame />}
       {props.state.boardReducer.roomId.length > 0 && (
-        <span>Joined game: {props.state.boardReducer.roomId}</span>
+        <div>Joined game: {props.state.boardReducer.roomId}</div>
       )}
-      {props.state.boardReducer.roomId.length > 0 && <Board />}
-      {/* <JoinGame />
-      <Board /> */}
+      {props.state.boardReducer.roomId.length > 0 &&
+        props.state.boardReducer.activeTurn === socket.id &&
+        props.state.boardReducer.winner.length === 0 && <div>Your turn</div>}
+      {props.state.boardReducer.roomId.length > 0 &&
+        props.state.boardReducer.activeTurn !== socket.id &&
+        props.state.boardReducer.winner.length === 0 && (
+          <div>Waiting for player turn..</div>
+        )}
+      {props.state.boardReducer.roomId.length > 0 &&
+        props.state.boardReducer.winner.length === 0 && <Board />}
+      {props.state.boardReducer.winner.length !== 0 && <PostGameScreen />}
     </StyledMain>
   );
 };
