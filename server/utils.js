@@ -23,12 +23,10 @@ const joinOrCreateRoom = (io, socket) => {
   );
   if (roomsWaitingForMatch.length < 1) {
     const newRoomId = Math.random().toString().substring(2);
-    console.log("no rooms to join, creating new room: ", newRoomId);
     socket.join(newRoomId);
     return newRoomId;
   }
   //join first room waiting for match
-  console.log("joining room..: ", roomsWaitingForMatch);
   socket.join(roomsWaitingForMatch[0]);
   return roomsWaitingForMatch[0];
 };

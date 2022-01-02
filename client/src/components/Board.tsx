@@ -9,6 +9,7 @@ import {
 } from "../redux/Board/board.actions";
 import { useEffect } from "react";
 import { StateType } from "../types";
+import { showBoardSymbol } from "../utils/utilityFunctions";
 
 const StyledBoard = styled.div`
 display: flex
@@ -29,6 +30,12 @@ const Board = (props) => {
 
   return (
     <StyledBoard>
+      {props.state.boardReducer.playerState.length === 2 && (
+        <div>
+          You are:{" "}
+          {showBoardSymbol(socket.id, props.state.boardReducer.playerState)}
+        </div>
+      )}
       <BoardRow rowId={0} />
       <BoardRow rowId={1} />
       <BoardRow rowId={2} />

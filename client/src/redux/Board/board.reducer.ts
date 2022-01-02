@@ -13,9 +13,9 @@ import { StateType } from "../../types";
 const INITIAL_STATE: StateType = {
   roomId: "",
   boardState: [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
   ],
   playerState: [],
   activeTurn: [],
@@ -57,14 +57,13 @@ const reducer = (state = INITIAL_STATE, action: any) => {
         roomId: action.payload.roomId,
       };
     case RESET_STATE:
-      console.log("resetting");
       return {
         ...state,
         roomId: INITIAL_STATE.roomId,
         boardState: [
-          [0, 0, 0],
-          [0, 0, 0],
-          [0, 0, 0],
+          ["", "", ""],
+          ["", "", ""],
+          ["", "", ""],
         ],
         playerState: INITIAL_STATE.playerState,
         activeTurn: INITIAL_STATE.activeTurn,

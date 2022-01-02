@@ -4,10 +4,10 @@ import { socket } from "../connection/socket";
 import { resetState } from "../redux/Board/board.actions";
 
 export const PostGameScreen = (props) => {
+  socket.emit("leave-room-client", props.state.boardReducer.roomId);
+
   const onQuitToLobby = () => {
-    socket.emit("leave-room-client", props.state.boardReducer.roomId);
     props.resetState();
-    console.log("quit to lobby");
   };
 
   return (
@@ -18,7 +18,11 @@ export const PostGameScreen = (props) => {
           {props.state.boardReducer.winner}
         </div>
       )}
-      {props.state.boardReducer.winner !== socket.id && <div>You lose</div>}
+      {props.state.boardReducer.winner !== socket.id &&
+        props.state.boardReducer.winner !== "tie" && <div>You lose</div>}
+      {props.state.boardReducer.winner === "tie" && (
+        <div>TIE: YOUR NFT HAS BEEN DESTROYED AND DONATED!!</div>
+      )}
       <button onClick={onQuitToLobby}>Quit to Lobby</button>
     </div>
   );

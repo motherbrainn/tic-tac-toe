@@ -3,7 +3,7 @@ import { socket } from "../connection/socket";
 import { connect } from "react-redux";
 import { setActiveTurn, setBoardState } from "../redux/Board/board.actions";
 import { StateType } from "../types";
-import { turnDecider } from "../utils/utilityFunctions";
+import { turnDecider, showBoardSymbol } from "../utils/utilityFunctions";
 
 const StyledBox = styled.div`
   width: 150px;
@@ -13,6 +13,12 @@ const StyledBox = styled.div`
   color: black;
   border-radius: 3px;
   text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-size: 125px;
 `;
 
 const Box = (props) => {
@@ -34,7 +40,6 @@ const Box = (props) => {
         socket.id,
         props.state.boardReducer.playerState
       );
-      console.log("setting local next turn: ", nextTurn);
       props.setActiveTurn(nextTurn);
 
       //set active turn for other client in room
@@ -46,9 +51,16 @@ const Box = (props) => {
       );
     }
   };
+
   return (
     <StyledBox onClick={() => onClickHandler(props.rowId, props.columnId)}>
-      {props.state.boardReducer.boardState[props.rowId][props.columnId]}
+      <span>
+        {props.state.boardReducer.boardState[props.rowId][props.columnId] &&
+          showBoardSymbol(
+            props.state.boardReducer.boardState[props.rowId][props.columnId],
+            props.state.boardReducer.playerState
+          )}
+      </span>
     </StyledBox>
   );
 };

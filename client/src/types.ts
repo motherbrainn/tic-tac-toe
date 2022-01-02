@@ -2,7 +2,7 @@ import { StringDecoder } from "string_decoder";
 
 export interface StateType {
   roomId: string;
-  boardState: [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+  boardState: [["", "", ""], ["", "", ""], ["", "", ""]];
   playerState: [];
   activeTurn: string[];
   winner: string;

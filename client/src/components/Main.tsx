@@ -19,7 +19,6 @@ display: flex
 flex-wrap: wrap`;
 
 const Main = (props) => {
-  useEffect(() => console.log(props.state.boardReducer.roomId.length));
   useEffect(() => {
     socket.on("join-room-server", (roomId, players, activeTurn) => {
       props.setRoom(roomId);
@@ -29,10 +28,6 @@ const Main = (props) => {
     socket.on("room-joined-server", (players, activeTurn) => {
       props.setPlayers(players);
       props.setActiveTurn(activeTurn);
-    });
-    socket.on("player-connect", (playerId) => {
-      console.log("connect");
-      //props.createPlayer(playerId);
     });
   }, []);
   return (
