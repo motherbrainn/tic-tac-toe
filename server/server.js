@@ -57,6 +57,6 @@ io.on("connection", (socket) => {
   });
 });
 
-instrument(io, { auth: false });
+instrument(io, { auth: { type: "basic", username: "admin", password: "hax" } });
 
 server.listen(PORT, () => console.log(`Server is connected to port ${PORT}`));
