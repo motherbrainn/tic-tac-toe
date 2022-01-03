@@ -11,7 +11,7 @@ const Header = () => {
       <StyledHeader>NFT Tic Tac Toe</StyledHeader>
       <StyledP>
         Every game there is a 100% unique genuine NFT up for grabs.. Winner
-        takes all. If there is a tie the NFT is cut in half and donated.
+        takes all. If there is a tie <i>the NFT is cut in half and donated.</i>
       </StyledP>
     </div>
   );

@@ -15,7 +15,10 @@ const JoinGame = () => {
   };
   return (
     <div>
-      <StyledJoinGameButton onClick={onJoinGameHandler}>
+      <StyledJoinGameButton
+        onClick={onJoinGameHandler}
+        onTouchStart={onJoinGameHandler}
+      >
         Search for game..
       </StyledJoinGameButton>
     </div>
