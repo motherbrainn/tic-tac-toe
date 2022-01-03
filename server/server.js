@@ -17,7 +17,11 @@ app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://admin.socket.io"],
+    origin: [
+      "http://localhost:3000",
+      "https://admin.socket.io",
+      "https://nft-tic-tac-toe.herokuapp.com",
+    ],
     credentials: true,
   },
 });
