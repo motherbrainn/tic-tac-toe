@@ -2,8 +2,20 @@ const { instrument } = require("@socket.io/admin-ui");
 const utils = require("./utils");
 const joinOrCreateRoom = utils.joinOrCreateRoom;
 const getRandomIntInclusive = utils.getRandomIntInclusive;
+const http = require("http");
+const express = require("express");
+const path = require("path");
 
-const io = require("socket.io")(8080, {
+const app = express();
+const server = http.createServer(app);
+
+const PORT = process.env.PORT || 8080;
+
+//This will create a middleware.
+//When you navigate to the root page, it would use the built react-app
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
+const io = require("socket.io")(server, {
   cors: {
     origin: ["http://localhost:3000", "https://admin.socket.io"],
     credentials: true,
@@ -42,3 +54,5 @@ io.on("connection", (socket) => {
 });
 
 instrument(io, { auth: false });
+
+server.listen(PORT, () => console.log(`Server is Connected to Port ${PORT}`));
