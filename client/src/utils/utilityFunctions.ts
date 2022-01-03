@@ -28,7 +28,7 @@ export const checkForWinner = (boardState): string => {
     boardState[1][0] === boardState[1][1] &&
     boardState[1][0] === boardState[1][2]
   ) {
-    return boardState[0][0];
+    return boardState[1][0];
   }
   if (
     boardState[2][0] !== "" &&
@@ -37,7 +37,7 @@ export const checkForWinner = (boardState): string => {
     boardState[2][0] === boardState[2][1] &&
     boardState[2][0] === boardState[2][2]
   ) {
-    return boardState[0][0];
+    return boardState[2][0];
   }
   //vertical wins
   if (
@@ -97,7 +97,6 @@ export const checkForWinner = (boardState): string => {
     boardState[2][1] !== "" &&
     boardState[2][2] !== ""
   ) {
-    console.log("tie");
     return "tie";
   } else return "";
 };

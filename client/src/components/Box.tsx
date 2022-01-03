@@ -19,6 +19,7 @@ const StyledBox = styled.div`
   align-content: center;
   flex-direction: column;
   font-size: 125px;
+  cursor: pointer;
 `;
 
 const Box = (props) => {
@@ -28,6 +29,7 @@ const Box = (props) => {
     //clients should listen for event from server and set state
     if (props.state.boardReducer.activeTurn === socket.id) {
       props.setGameBoardState(rowId, columnId, socket.id);
+
       socket.emit(
         "update-board-client",
         rowId,
@@ -40,6 +42,7 @@ const Box = (props) => {
         socket.id,
         props.state.boardReducer.playerState
       );
+
       props.setActiveTurn(nextTurn);
 
       //set active turn for other client in room

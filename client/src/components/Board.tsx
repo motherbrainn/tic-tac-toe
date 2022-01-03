@@ -26,7 +26,7 @@ const Board = (props) => {
     });
   }, []);
 
-  useEffect(() => console.log(props.state));
+  //useEffect(() => console.log(props.state));
 
   return (
     <StyledBoard>

@@ -9,7 +9,7 @@ export const PostGameScreen = (props) => {
   const onQuitToLobby = () => {
     props.resetState();
   };
-  console.log("socket id: ", socket.id);
+
   return (
     <div>
       {props.state.boardReducer.winner === socket.id && (

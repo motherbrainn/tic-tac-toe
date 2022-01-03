@@ -59,4 +59,4 @@ io.on("connection", (socket) => {
 
 //instrument(io, { auth: false });
 
-server.listen(PORT, () => console.log(`Server is Connected to Port ${PORT}`));
+server.listen(PORT, () => console.log(`Server is connected to port ${PORT}`));
