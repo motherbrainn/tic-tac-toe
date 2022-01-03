@@ -16,6 +16,10 @@ display: flex
 flex-wrap: wrap
 `;
 
+const StyledYouAre = styled.div`
+  text-align: center;
+`;
+
 const Board = (props) => {
   useEffect(() => {
     socket.on("update-board-server", (rowId, columnId, socketId) => {
@@ -31,10 +35,10 @@ const Board = (props) => {
   return (
     <StyledBoard>
       {props.state.boardReducer.playerState.length === 2 && (
-        <div>
+        <StyledYouAre>
           You are:{" "}
           {showBoardSymbol(socket.id, props.state.boardReducer.playerState)}
-        </div>
+        </StyledYouAre>
       )}
       <BoardRow rowId={0} />
       <BoardRow rowId={1} />

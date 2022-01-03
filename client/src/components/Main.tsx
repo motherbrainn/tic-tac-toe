@@ -18,6 +18,22 @@ const StyledMain = styled.div`
 display: flex
 flex-wrap: wrap`;
 
+const StyledJoined = styled.div`
+  text-align: center;
+`;
+
+const StyledWaiting = styled.div`
+  font-size: 25px;
+  text-align: center;
+  background: red;
+`;
+
+const StyledYourTurn = styled.div`
+  font-size: 25px;
+  text-align: center;
+  background: green;
+`;
+
 const Main = (props) => {
   useEffect(() => {
     socket.on("join-room-server", (roomId, players, activeTurn) => {
@@ -35,15 +51,19 @@ const Main = (props) => {
       <Header />
       {props.state.boardReducer.roomId.length === 0 && <JoinGame />}
       {props.state.boardReducer.roomId.length > 0 && (
-        <div>Joined game: {props.state.boardReducer.roomId}</div>
+        <StyledJoined>
+          Joined game: {props.state.boardReducer.roomId}
+        </StyledJoined>
       )}
       {props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.activeTurn === socket.id &&
-        props.state.boardReducer.winner.length === 0 && <div>Your turn</div>}
+        props.state.boardReducer.winner.length === 0 && (
+          <StyledYourTurn>Your turn</StyledYourTurn>
+        )}
       {props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.activeTurn !== socket.id &&
         props.state.boardReducer.winner.length === 0 && (
-          <div>Waiting for player turn..</div>
+          <StyledWaiting>Waiting for player turn..</StyledWaiting>
         )}
       {props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.winner.length === 0 && <Board />}

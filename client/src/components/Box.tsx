@@ -23,7 +23,6 @@ const StyledBox = styled.div`
 `;
 
 const Box = (props) => {
-  console.log("test");
   const onClickHandler = (rowId: number, columnId: number) => {
     //emit the state we want to update up to the server
     //then send state down to clients
