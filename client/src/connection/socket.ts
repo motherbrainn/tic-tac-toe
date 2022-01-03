@@ -1,6 +1,13 @@
 import { io } from "socket.io-client";
 
-//export const socket = io("http://localhost:8080");
-console.log(process.env.NODE_ENV);
+const env = process.env.NODE_ENV;
 
-export const socket = io("https://nft-tic-tac-toe.herokuapp.com");
+const determineClientSideAddress = (env: string) => {
+  if (env === "production") {
+    return "https://nft-tic-tac-toe.herokuapp.com";
+  } else {
+    return "http://localhost:8080";
+  }
+};
+
+export const socket = io(determineClientSideAddress(env));
