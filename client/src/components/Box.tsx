@@ -27,7 +27,13 @@ const Box = (props) => {
     //emit the state we want to update up to the server
     //then send state down to clients
     //clients should listen for event from server and set state
-    if (props.state.boardReducer.activeTurn === socket.id) {
+    console.log(
+      props.state.boardReducer.boardState[rowId][columnId].length > 0
+    );
+    if (
+      props.state.boardReducer.activeTurn === socket.id &&
+      props.state.boardReducer.boardState[rowId][columnId].length === 0
+    ) {
       props.setGameBoardState(rowId, columnId, socket.id);
 
       socket.emit(
