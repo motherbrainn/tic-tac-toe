@@ -1,4 +1,4 @@
-const { instrument } = require("@socket.io/admin-ui");
+//const { instrument } = require("@socket.io/admin-ui");
 const utils = require("./utils");
 const joinOrCreateRoom = utils.joinOrCreateRoom;
 const getRandomIntInclusive = utils.getRandomIntInclusive;
@@ -53,6 +53,6 @@ io.on("connection", (socket) => {
   });
 });
 
-instrument(io, { auth: false });
+//instrument(io, { auth: false });
 
 server.listen(PORT, () => console.log(`Server is Connected to Port ${PORT}`));
