@@ -1,13 +1,11 @@
 import {
   SET_GAME_BOARD_STATE,
-  CREATE_PLAYER,
   SET_ACTIVE_TURN,
   SET_ROOM,
   SET_PLAYERS,
   RESET_STATE,
 } from "./board.types";
 import { checkForWinner } from "../../utils/utilityFunctions";
-import { Player } from "../../classes/player";
 import { StateType } from "../../types";
 
 const INITIAL_STATE: StateType = {
@@ -32,14 +30,6 @@ const reducer = (state = INITIAL_STATE, action: any) => {
         ...state,
         boardState: copyOfBoardState,
         winner: checkForWinner(state.boardState),
-      };
-    case CREATE_PLAYER:
-      return {
-        ...state,
-        playerState: [
-          ...state.playerState,
-          new Player(action.payload.playerId),
-        ],
       };
     case SET_PLAYERS:
       return {

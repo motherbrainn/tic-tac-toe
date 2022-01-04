@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { socket } from "../connection/socket";
 import { connect } from "react-redux";
 import { setActiveTurn, setBoardState } from "../redux/Board/board.actions";
-import { StateType } from "../types";
+import { StateType, PropsType } from "../types";
 import { turnDecider, showBoardSymbol } from "../utils/utilityFunctions";
 
 const StyledBox = styled.div`
@@ -22,7 +22,7 @@ const StyledBox = styled.div`
   cursor: pointer;
 `;
 
-const Box = (props) => {
+const Box = (props: PropsType) => {
   const onClickHandler = (rowId: number, columnId: number) => {
     //emit the state we want to update up to the server
     //then send state down to clients

@@ -1,6 +1,5 @@
 import {
   SET_GAME_BOARD_STATE,
-  CREATE_PLAYER,
   SET_ACTIVE_TURN,
   SET_ROOM,
   SET_PLAYERS,
@@ -15,13 +14,6 @@ export const setBoardState = (
   return {
     type: SET_GAME_BOARD_STATE,
     payload: { rowId: rowId, columnId: columnId, socketId: socketId },
-  };
-};
-
-export const createPlayer = (playerId: string) => {
-  return {
-    type: CREATE_PLAYER,
-    payload: { playerId: playerId },
   };
 };
 

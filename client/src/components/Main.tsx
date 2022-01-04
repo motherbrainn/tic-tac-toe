@@ -4,12 +4,11 @@ import JoinGame from "./JoinGame";
 import Header from "./Header";
 import PostGameScreen from "./PostGameScreen";
 import { connect } from "react-redux";
-import { StateType } from "../types";
+import { StateType, PropsType, DispatchType } from "../types";
 import { useEffect } from "react";
 import { socket } from "../connection/socket";
 import {
   setRoom,
-  createPlayer,
   setActiveTurn,
   setPlayers,
 } from "../redux/Board/board.actions";
@@ -34,7 +33,7 @@ const StyledYourTurn = styled.div`
   background: green;
 `;
 
-const Main = (props) => {
+const Main = (props: PropsType) => {
   useEffect(() => {
     socket.on("join-room-server", (roomId, players, activeTurn) => {
       props.setRoom(roomId);
@@ -46,6 +45,7 @@ const Main = (props) => {
       props.setActiveTurn(activeTurn);
     });
   }, []);
+
   return (
     <StyledMain>
       <Header />
@@ -78,10 +78,9 @@ const mapStateToProps = (state: StateType) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
     setRoom: (roomId: string) => dispatch(setRoom(roomId)),
-    createPlayer: (playerId: string) => dispatch(createPlayer(playerId)),
     setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
     setPlayers: (playerId: string) => dispatch(setPlayers(playerId)),
   };

@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import { socket } from "../connection/socket";
 import { resetState } from "../redux/Board/board.actions";
 import styled from "styled-components";
+import { PropsType } from "../types";
 
 const StyledDiv = styled.div`
   text-align: center;
 `;
 
-export const PostGameScreen = (props) => {
+export const PostGameScreen = (props: PropsType) => {
   socket.emit("leave-room-client", props.state.boardReducer.roomId);
 
   const onQuitToLobby = () => {
