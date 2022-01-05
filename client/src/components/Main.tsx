@@ -4,8 +4,8 @@ import JoinGame from "./JoinGame";
 import Header from "./Header";
 import PostGameScreen from "./PostGameScreen";
 import { connect } from "react-redux";
-import { StateType, PropsType, DispatchType } from "../types";
-import { useEffect } from "react";
+import { StateType, PropsType } from "../types";
+import { Dispatch, useEffect } from "react";
 import { socket } from "../connection/socket";
 import {
   setRoom,
@@ -78,7 +78,7 @@ const mapStateToProps = (state: StateType) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: DispatchType) => {
+const mapDispatchToProps = (dispatch: Dispatch<BoardActionsType>) => {
   return {
     setRoom: (roomId: string) => dispatch(setRoom(roomId)),
     setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),

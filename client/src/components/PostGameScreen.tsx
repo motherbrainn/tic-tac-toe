@@ -18,17 +18,11 @@ export const PostGameScreen = (props: PropsType) => {
 
   return (
     <StyledDiv>
-      {props.state.boardReducer.winner === socket.id && (
-        <div>
-          You won! Here is your NFT, please feel free to screenshot:{" "}
-          {props.state.boardReducer.winner}
-        </div>
-      )}
+      {props.state.boardReducer.winner === socket.id && <div>You won!</div>}
+
       {props.state.boardReducer.winner !== socket.id &&
         props.state.boardReducer.winner !== "tie" && <div>You lose</div>}
-      {props.state.boardReducer.winner === "tie" && (
-        <div>TIE: Your NFT has been destroyed and donated!!</div>
-      )}
+      {props.state.boardReducer.winner === "tie" && <div>TIE</div>}
       <button onClick={onQuitToLobby}>Quit to Lobby</button>
     </StyledDiv>
   );

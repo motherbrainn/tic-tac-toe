@@ -34,4 +34,6 @@ export interface PropsType {
 //   setRoom?: (roomId: string) => { type: string; payload: { roomId: string } };
 // }
 
-export type DispatchType = () => {};
+// export interface BoardActionsType {
+// type:
+// }
