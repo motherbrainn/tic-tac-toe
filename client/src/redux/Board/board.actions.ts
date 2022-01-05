@@ -1,10 +1,4 @@
-import {
-  SET_GAME_BOARD_STATE,
-  SET_ACTIVE_TURN,
-  SET_ROOM,
-  SET_PLAYERS,
-  RESET_STATE,
-} from "./board.types";
+import { ReducerAction } from "../../types";
 
 export const setBoardState = (
   rowId: number,
@@ -12,34 +6,34 @@ export const setBoardState = (
   socketId: string
 ) => {
   return {
-    type: SET_GAME_BOARD_STATE,
+    type: ReducerAction.SET_GAME_BOARD_STATE,
     payload: { rowId: rowId, columnId: columnId, socketId: socketId },
   };
 };
 
 export const setActiveTurn = (playerId: string) => {
   return {
-    type: SET_ACTIVE_TURN,
+    type: ReducerAction.SET_ACTIVE_TURN,
     payload: { playerId: playerId },
   };
 };
 
 export const setRoom = (roomId: string) => {
   return {
-    type: SET_ROOM,
+    type: ReducerAction.SET_ROOM,
     payload: { roomId: roomId },
   };
 };
 
 export const setPlayers = (playerId: string) => {
   return {
-    type: SET_PLAYERS,
+    type: ReducerAction.SET_PLAYERS,
     payload: { playerId: playerId },
   };
 };
 
 export const resetState = () => {
   return {
-    type: RESET_STATE,
+    type: ReducerAction.RESET_STATE,
   };
 };

@@ -19,23 +19,10 @@ export interface PropsType {
   state: BoardReducerType;
 }
 
-//this type is not right
-// export interface DispatchType {
-//   setGameBoardState?: (
-//     rowId: string,
-//     columnId: string,
-//     socketId: string
-//   ) => {
-//     type: string;
-//     payload: { rowId: string; columnId: string; socketId: string };
-//   };
-//   setActiveTurn?: (playerId: string) => {
-//     type: string;
-//     payload: { playerId: string };
-//   };
-//   setRoom?: (roomId: string) => { type: string; payload: { roomId: string } };
-// }
-
-// export interface BoardActionsType {
-// type:
-// }
+export enum ReducerAction {
+  SET_GAME_BOARD_STATE = "SET_GAME_BOARD_STATE",
+  SET_ACTIVE_TURN = "SET_ACTIVE_TURN",
+  SET_ROOM = "SET_ROOM",
+  SET_PLAYERS = "SET_PLAYERS",
+  RESET_STATE = "RESET_STATE",
+}
