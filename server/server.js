@@ -20,7 +20,7 @@ const io = require("socket.io")(server, {
     origin: [
       "http://localhost:3000",
       "https://admin.socket.io",
-      "http://nft-tic-tac-toe.herokuapp.com",
+      "http://tic-tac-toe-vs.herokuapp.com",
     ],
     credentials: true,
   },
