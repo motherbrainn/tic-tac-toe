@@ -3,8 +3,8 @@ import Board from "./Board";
 import JoinGame from "./JoinGame";
 import Header from "./Header";
 import PostGameScreen from "./PostGameScreen";
-import { connect } from "react-redux";
-import { StateType, PropsType } from "../types";
+import { connect, ConnectedProps } from "react-redux";
+import { BoardReducerType } from "../types";
 import { Dispatch, useEffect } from "react";
 import { socket } from "../connection/socket";
 import {
@@ -33,7 +33,24 @@ const StyledYourTurn = styled.div`
   background: green;
 `;
 
-const Main = (props: PropsType) => {
+const mapStateToProps = (state: BoardReducerType) => {
+  return {
+    state,
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+  return {
+    setRoom: (roomId: string) => dispatch(setRoom(roomId)),
+    setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
+    setPlayers: (playerId: string) => dispatch(setPlayers(playerId)),
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const Main = (props: PropsFromRedux) => {
   useEffect(() => {
     socket.on("join-room-server", (roomId, players, activeTurn) => {
       props.setRoom(roomId);
@@ -45,7 +62,6 @@ const Main = (props: PropsType) => {
       props.setActiveTurn(activeTurn);
     });
   }, []);
-  console.log("props: ", props);
   return (
     <StyledMain>
       <Header />
@@ -70,20 +86,6 @@ const Main = (props: PropsType) => {
       {props.state.boardReducer.winner.length !== 0 && <PostGameScreen />}
     </StyledMain>
   );
-};
-
-const mapStateToProps = (state: StateType) => {
-  return {
-    state,
-  };
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<BoardActionsType>) => {
-  return {
-    setRoom: (roomId: string) => dispatch(setRoom(roomId)),
-    setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
-    setPlayers: (playerId: string) => dispatch(setPlayers(playerId)),
-  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

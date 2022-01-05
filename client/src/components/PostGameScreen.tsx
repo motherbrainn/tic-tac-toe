@@ -1,15 +1,28 @@
-import { StateType } from "../types";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { socket } from "../connection/socket";
 import { resetState } from "../redux/Board/board.actions";
 import styled from "styled-components";
-import { PropsType } from "../types";
+import { BoardReducerType } from "../types";
+import { Dispatch } from "react";
 
 const StyledDiv = styled.div`
   text-align: center;
 `;
 
-export const PostGameScreen = (props: PropsType) => {
+const mapStateToProps = (state: BoardReducerType) => {
+  return {
+    state,
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+  return { resetState: () => dispatch(resetState()) };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export const PostGameScreen = (props: PropsFromRedux) => {
   socket.emit("leave-room-client", props.state.boardReducer.roomId);
 
   const onQuitToLobby = () => {
@@ -26,16 +39,6 @@ export const PostGameScreen = (props: PropsType) => {
       <button onClick={onQuitToLobby}>Quit to Lobby</button>
     </StyledDiv>
   );
-};
-
-const mapStateToProps = (state: StateType) => {
-  return {
-    state,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return { resetState: () => dispatch(resetState()) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostGameScreen);

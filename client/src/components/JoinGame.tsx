@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { socket } from "../connection/socket";
-import { StateType } from "../types";
+import { BoardReducerType } from "../types";
 import styled from "styled-components";
 
 const StyledJoinGameButton = styled.button`
@@ -22,14 +22,10 @@ const JoinGame = () => {
   );
 };
 
-const mapStateToProps = (state: StateType) => {
+const mapStateToProps = (state: BoardReducerType) => {
   return {
     state,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(JoinGame);
+export default connect(mapStateToProps)(JoinGame);

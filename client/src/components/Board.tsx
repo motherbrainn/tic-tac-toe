@@ -1,10 +1,10 @@
 import BoardRow from "./BoardRow";
 import styled from "styled-components";
 import { socket } from "../connection/socket";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { setBoardState, setActiveTurn } from "../redux/Board/board.actions";
 import { Dispatch, useEffect } from "react";
-import { StateType, PropsType } from "../types";
+import { BoardReducerType } from "../types";
 import { showBoardSymbol } from "../utils/utilityFunctions";
 
 const StyledBoard = styled.div`
@@ -16,7 +16,23 @@ const StyledYouAre = styled.div`
   text-align: center;
 `;
 
-const Board = (props: PropsType) => {
+const mapStateToProps = (state: BoardReducerType) => {
+  return {
+    state,
+  };
+};
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+  return {
+    setGameBoardState: (rowId: number, columnId: number, socketId: string) =>
+      dispatch(setBoardState(rowId, columnId, socketId)),
+    setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const Board = (props: PropsFromRedux) => {
   useEffect(() => {
     socket.on("update-board-server", (rowId, columnId, socketId) => {
       props.setGameBoardState(rowId, columnId, socketId);
@@ -41,20 +57,6 @@ const Board = (props: PropsType) => {
       <BoardRow rowId={2} />
     </StyledBoard>
   );
-};
-
-const mapStateToProps = (state: StateType) => {
-  return {
-    state,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setGameBoardState: (rowId: string, columnId: number, socketId: number) =>
-      dispatch(setBoardState(rowId, columnId, socketId)),
-    setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
-  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

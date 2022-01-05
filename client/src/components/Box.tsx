@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import { socket } from "../connection/socket";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { setActiveTurn, setBoardState } from "../redux/Board/board.actions";
-import { StateType, PropsType } from "../types";
+import { BoardReducerType } from "../types";
 import { turnDecider, showBoardSymbol } from "../utils/utilityFunctions";
+import { Dispatch } from "react";
+
+interface Props extends PropsFromRedux {
+  rowId: number;
+  columnId: number;
+}
 
 const StyledBox = styled.div`
   width: 150px;
@@ -22,7 +28,24 @@ const StyledBox = styled.div`
   cursor: pointer;
 `;
 
-const Box = (props: PropsType) => {
+const mapStateToProps = (state: BoardReducerType) => {
+  return {
+    state,
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+  return {
+    setGameBoardState: (rowId: number, columnId: number, socketId: string) =>
+      dispatch(setBoardState(rowId, columnId, socketId)),
+    setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const Box = (props: Props) => {
   const onClickHandler = (rowId: number, columnId: number) => {
     //emit the state we want to update up to the server
     //then send state down to clients
@@ -70,17 +93,5 @@ const Box = (props: PropsType) => {
     </StyledBox>
   );
 };
-const mapStateToProps = (state: StateType) => {
-  return {
-    state,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setGameBoardState: (rowId: number, columnId: number, socketId: string) =>
-      dispatch(setBoardState(rowId, columnId, socketId)),
-    setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
-  };
-};
 export default connect(mapStateToProps, mapDispatchToProps)(Box);

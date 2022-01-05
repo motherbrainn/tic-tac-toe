@@ -7,9 +7,9 @@ import {
 } from "./board.types";
 
 export const setBoardState = (
-  rowId: string,
+  rowId: number,
   columnId: number,
-  socketId: number
+  socketId: string
 ) => {
   return {
     type: SET_GAME_BOARD_STATE,

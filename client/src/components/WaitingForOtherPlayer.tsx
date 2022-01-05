@@ -11,11 +11,4 @@ const mapStateToProps = (state: StateType) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WaitingForOtherPlayer);
+export default connect(mapStateToProps)(WaitingForOtherPlayer);
