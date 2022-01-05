@@ -1,3 +1,5 @@
+import { boardState } from "../types";
+
 export const turnDecider = (currentPlayerId: string, playerArray: string[]) => {
   const nextPlayerIndex =
     playerArray.findIndex((e) => e === currentPlayerId) + 1;
@@ -10,7 +12,7 @@ export const turnDecider = (currentPlayerId: string, playerArray: string[]) => {
 };
 
 //returns id of winning player
-export const checkForWinner = (boardState): string => {
+export const checkForWinner = (boardState: boardState): string => {
   //horizontal wins
   if (
     boardState[0][0] !== "" &&

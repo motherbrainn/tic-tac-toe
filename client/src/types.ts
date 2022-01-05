@@ -1,6 +1,8 @@
+export type boardState = [["", "", ""], ["", "", ""], ["", "", ""]];
+
 export interface StateType {
   roomId: string;
-  boardState: [["", "", ""], ["", "", ""], ["", "", ""]];
+  boardState: boardState;
   playerState: string[];
   activeTurn: string;
   winner: string;
