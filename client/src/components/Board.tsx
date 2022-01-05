@@ -42,7 +42,7 @@ const Board = (props: PropsFromRedux) => {
     });
   }, []);
 
-  useEffect(() => console.log("test: ", props));
+  //useEffect(() => console.log("test: ", props));
 
   return (
     <StyledBoard>
