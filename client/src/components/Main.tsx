@@ -45,7 +45,7 @@ const Main = (props: PropsType) => {
       props.setActiveTurn(activeTurn);
     });
   }, []);
-
+  console.log("props: ", props);
   return (
     <StyledMain>
       <Header />

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { socket } from "../connection/socket";
 import { connect } from "react-redux";
 import { setBoardState, setActiveTurn } from "../redux/Board/board.actions";
-import { useEffect } from "react";
+import { Dispatch, useEffect } from "react";
 import { StateType, PropsType } from "../types";
 import { showBoardSymbol } from "../utils/utilityFunctions";
 

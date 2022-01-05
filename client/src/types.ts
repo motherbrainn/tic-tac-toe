@@ -1,11 +1,13 @@
 export interface StateType {
-  boardReducer: {
-    roomId: string;
-    boardState: [["", "", ""], ["", "", ""], ["", "", ""]];
-    playerState: string[];
-    activeTurn: string;
-    winner: string;
-  };
+  roomId: string;
+  boardState: [["", "", ""], ["", "", ""], ["", "", ""]];
+  playerState: string[];
+  activeTurn: string;
+  winner: string;
+}
+
+export interface BoardReducerType {
+  boardReducer: StateType;
 }
 
 export interface PropsType {
@@ -14,7 +16,7 @@ export interface PropsType {
   setRoom: (roomId: string) => {};
   setPlayers: (players: string) => {};
   resetState: () => {};
-  state: StateType;
+  state: BoardReducerType;
 }
 
 //this type is not right

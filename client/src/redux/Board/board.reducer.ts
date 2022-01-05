@@ -16,7 +16,7 @@ const INITIAL_STATE: StateType = {
     ["", "", ""],
   ],
   playerState: [],
-  activeTurn: [],
+  activeTurn: "",
   winner: "",
 };
 
