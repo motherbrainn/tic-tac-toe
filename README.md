@@ -1,6 +1,6 @@
 # tic-tac-toe
 
-To install locally: npm run install-client-server 
+To install locally: npm run install-client-server  
 To run locally: npm run devStart
 
 To replicate production locally: npm run heroku-postbuild, npm run start
