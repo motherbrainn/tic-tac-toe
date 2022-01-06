@@ -12,6 +12,7 @@ import {
   setActiveTurn,
   setPlayers,
 } from "../redux/Board/board.actions";
+import TurnTimer from "./TurnTimer";
 
 const StyledMain = styled.div`
 display: flex
@@ -31,6 +32,12 @@ const StyledYourTurn = styled.div`
   font-size: 25px;
   text-align: center;
   background: green;
+`;
+
+const StyledWaitingForOpponent = styled.div`
+  font-size: 25px;
+  text-align: center;
+  background: yellow;
 `;
 
 const mapStateToProps = (state: BoardReducerType) => {
@@ -62,6 +69,7 @@ const Main = (props: PropsFromRedux) => {
       props.setActiveTurn(activeTurn);
     });
   }, []);
+
   return (
     <StyledMain>
       <Header />
@@ -76,14 +84,22 @@ const Main = (props: PropsFromRedux) => {
         props.state.boardReducer.winner.length === 0 && (
           <StyledYourTurn>Your turn</StyledYourTurn>
         )}
-      {props.state.boardReducer.roomId.length > 0 &&
+      {props.state.boardReducer.playerState.length === 2 &&
+        props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.activeTurn !== socket.id &&
         props.state.boardReducer.winner.length === 0 && (
           <StyledWaiting>Waiting for player turn..</StyledWaiting>
         )}
-      {props.state.boardReducer.roomId.length > 0 &&
+      {props.state.boardReducer.playerState.length === 1 && (
+        <StyledWaitingForOpponent>
+          Waiting for opponent to connect..
+        </StyledWaitingForOpponent>
+      )}
+      {props.state.boardReducer.playerState.length === 2 &&
+        props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.winner.length === 0 && <Board />}
       {props.state.boardReducer.winner.length !== 0 && <PostGameScreen />}
+      {/* <TurnTimer /> */}
     </StyledMain>
   );
 };

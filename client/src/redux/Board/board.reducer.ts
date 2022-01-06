@@ -12,6 +12,7 @@ const INITIAL_STATE: StateType = {
   playerState: [],
   activeTurn: "",
   winner: "",
+  time: 0,
 };
 
 const reducer = (state = INITIAL_STATE, action: any) => {
@@ -52,6 +53,17 @@ const reducer = (state = INITIAL_STATE, action: any) => {
         playerState: INITIAL_STATE.playerState,
         activeTurn: INITIAL_STATE.activeTurn,
         winner: INITIAL_STATE.winner,
+      };
+    case ReducerAction.INCREMENT_TIMER:
+      return {
+        ...state,
+        time: state.time + 1,
+      };
+
+    case ReducerAction.RESET_TIMER:
+      return {
+        ...state,
+        time: 0,
       };
     default:
       return state;

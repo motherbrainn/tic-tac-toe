@@ -37,3 +37,15 @@ export const resetState = () => {
     type: ReducerAction.RESET_STATE,
   };
 };
+
+export const incrementTimer = () => {
+  return {
+    type: ReducerAction.INCREMENT_TIMER,
+  };
+};
+
+export const resetTimer = () => {
+  return {
+    type: ReducerAction.RESET_TIMER,
+  };
+};

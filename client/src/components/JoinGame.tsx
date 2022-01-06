@@ -1,7 +1,9 @@
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { socket } from "../connection/socket";
 import { BoardReducerType } from "../types";
 import styled from "styled-components";
+import { Dispatch } from "react";
+import { resetTimer } from "../redux/Board/board.actions";
 
 const StyledJoinGameButton = styled.button`
   display: flex;
@@ -9,8 +11,24 @@ const StyledJoinGameButton = styled.button`
   margin-right: auto;
 `;
 
-const JoinGame = () => {
+const mapStateToProps = (state: BoardReducerType) => {
+  return {
+    state,
+  };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+  return {
+    resetTimer: () => dispatch(resetTimer()),
+  };
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const JoinGame = (props: PropsFromRedux) => {
   const onJoinGameHandler = () => {
+    props.resetTimer();
     socket.emit("join-room-client");
   };
   return (
@@ -22,10 +40,4 @@ const JoinGame = () => {
   );
 };
 
-const mapStateToProps = (state: BoardReducerType) => {
-  return {
-    state,
-  };
-};
-
-export default connect(mapStateToProps)(JoinGame);
+export default connect(mapStateToProps, mapDispatchToProps)(JoinGame);

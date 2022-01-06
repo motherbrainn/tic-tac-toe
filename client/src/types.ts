@@ -6,6 +6,7 @@ export interface StateType {
   playerState: string[];
   activeTurn: string;
   winner: string;
+  time: number;
 }
 
 export interface BoardReducerType {
@@ -27,4 +28,6 @@ export enum ReducerAction {
   SET_ROOM = "SET_ROOM",
   SET_PLAYERS = "SET_PLAYERS",
   RESET_STATE = "RESET_STATE",
+  INCREMENT_TIMER = "INCREMENT_TIMER",
+  RESET_TIMER = "RESET_TIMER",
 }

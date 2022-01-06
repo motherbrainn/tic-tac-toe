@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { socket } from "../connection/socket";
 import { connect, ConnectedProps } from "react-redux";
-import { setActiveTurn, setBoardState } from "../redux/Board/board.actions";
+import {
+  setActiveTurn,
+  setBoardState,
+  resetTimer,
+} from "../redux/Board/board.actions";
 import { BoardReducerType } from "../types";
 import { turnDecider, showBoardSymbol } from "../utils/utilityFunctions";
 import { Dispatch } from "react";
@@ -39,6 +43,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     setGameBoardState: (rowId: number, columnId: number, socketId: string) =>
       dispatch(setBoardState(rowId, columnId, socketId)),
     setActiveTurn: (playerId: string) => dispatch(setActiveTurn(playerId)),
+    resetTimer: () => dispatch(resetTimer()),
   };
 };
 
@@ -54,6 +59,8 @@ const Box = (props: Props) => {
       props.state.boardReducer.activeTurn === socket.id &&
       props.state.boardReducer.boardState[rowId][columnId].length === 0
     ) {
+      props.resetTimer();
+
       props.setGameBoardState(rowId, columnId, socket.id);
 
       socket.emit(

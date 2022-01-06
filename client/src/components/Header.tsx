@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <div>
       <StyledHeader>Tic Tac Toe</StyledHeader>
-      <StyledP></StyledP>
+      <StyledP>Play against live opponents from anywhere in the world</StyledP>
     </div>
   );
 };
