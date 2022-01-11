@@ -74,6 +74,15 @@ const Main = (props: PropsFromRedux) => {
     <StyledMain>
       <Header />
       {props.state.boardReducer.roomId.length === 0 && <JoinGame />}
+      <TurnTimer
+        showTimer={
+          props.state.boardReducer.playerState.length > 0 &&
+          props.state.boardReducer.winner.length === 0
+        }
+        maxIdleTime={
+          props.state.boardReducer.playerState.length === 1 ? 15 : 30
+        }
+      />
       {props.state.boardReducer.roomId.length > 0 && (
         <StyledJoined>
           Joined game: {props.state.boardReducer.roomId}
@@ -99,7 +108,6 @@ const Main = (props: PropsFromRedux) => {
         props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.winner.length === 0 && <Board />}
       {props.state.boardReducer.winner.length !== 0 && <PostGameScreen />}
-      {/* <TurnTimer /> */}
     </StyledMain>
   );
 };
