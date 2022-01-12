@@ -93,7 +93,9 @@ const Box = (props: Props) => {
     <StyledBox
       onClick={() => onClickHandler(props.rowId, props.columnId)}
       whileHover={
-        props.state.boardReducer.activeTurn === socket.id
+        props.state.boardReducer.activeTurn === socket.id &&
+        props.state.boardReducer.boardState[props.rowId][props.columnId]
+          .length === 0
           ? { scale: 1.1, boxShadow: "0px 0px 8px white" }
           : {}
       }
