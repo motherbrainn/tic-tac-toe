@@ -4,6 +4,8 @@ const StyledHeader = styled.h1`
 `;
 const StyledP = styled.p`
   text-align: center;
+  max-width: 450px;
+  margin: 20px auto;
 `;
 const Header = () => {
   return (

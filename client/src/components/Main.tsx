@@ -16,7 +16,8 @@ import TurnTimer from "./TurnTimer";
 
 const StyledMain = styled.div`
 display: flex
-flex-wrap: wrap`;
+flex-wrap: wrap
+`;
 
 const StyledJoined = styled.div`
   text-align: center;
@@ -26,18 +27,24 @@ const StyledWaiting = styled.div`
   font-size: 25px;
   text-align: center;
   background: red;
+  max-width: 450px;
+  margin: 0 auto;
 `;
 
 const StyledYourTurn = styled.div`
   font-size: 25px;
   text-align: center;
   background: green;
+  max-width: 450px;
+  margin: 0 auto;
 `;
 
 const StyledWaitingForOpponent = styled.div`
   font-size: 25px;
   text-align: center;
   background: yellow;
+  max-width: 450px;
+  margin: 0 auto;
 `;
 
 const mapStateToProps = (state: BoardReducerType) => {
