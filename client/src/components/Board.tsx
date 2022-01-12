@@ -5,15 +5,10 @@ import { connect, ConnectedProps } from "react-redux";
 import { setBoardState, setActiveTurn } from "../redux/Board/board.actions";
 import { Dispatch, useEffect } from "react";
 import { BoardReducerType } from "../types";
-import { showBoardSymbol } from "../utils/utilityFunctions";
 
 const StyledBoard = styled.div`
 display: flex
 flex-wrap: wrap
-`;
-
-const StyledYouAre = styled.div`
-  text-align: center;
 `;
 
 const mapStateToProps = (state: BoardReducerType) => {
@@ -46,12 +41,6 @@ const Board = (props: PropsFromRedux) => {
 
   return (
     <StyledBoard>
-      {props.state.boardReducer.playerState.length === 2 && (
-        <StyledYouAre>
-          You are:{" "}
-          {showBoardSymbol(socket.id, props.state.boardReducer.playerState)}
-        </StyledYouAre>
-      )}
       <BoardRow rowId={0} />
       <BoardRow rowId={1} />
       <BoardRow rowId={2} />

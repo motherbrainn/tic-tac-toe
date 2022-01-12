@@ -9,18 +9,19 @@ import {
 import { BoardReducerType } from "../types";
 import { turnDecider, showBoardSymbol } from "../utils/utilityFunctions";
 import { Dispatch } from "react";
+import { motion } from "framer-motion";
 
 interface Props extends PropsFromRedux {
   rowId: number;
   columnId: number;
 }
 
-const StyledBox = styled.div`
+const StyledBox = styled(motion.div)`
   width: 150px;
   height: 150px;
   margin: 1px;
-  background-color: grey;
-  color: black;
+  background-color: black;
+  color: white;
   border-radius: 3px;
   text-align: center;
 
@@ -89,7 +90,14 @@ const Box = (props: Props) => {
   };
 
   return (
-    <StyledBox onClick={() => onClickHandler(props.rowId, props.columnId)}>
+    <StyledBox
+      onClick={() => onClickHandler(props.rowId, props.columnId)}
+      whileHover={
+        props.state.boardReducer.activeTurn === socket.id
+          ? { scale: 1.1, boxShadow: "0px 0px 8px white" }
+          : {}
+      }
+    >
       <span>
         {props.state.boardReducer.boardState[props.rowId][props.columnId] &&
           showBoardSymbol(

@@ -13,6 +13,7 @@ import {
   setPlayers,
 } from "../redux/Board/board.actions";
 import TurnTimer from "./TurnTimer";
+import { showBoardSymbol } from "../utils/utilityFunctions";
 
 const StyledMain = styled.div`
 display: flex
@@ -26,25 +27,32 @@ const StyledJoined = styled.div`
 const StyledWaiting = styled.div`
   font-size: 25px;
   text-align: center;
-  background: red;
-  max-width: 450px;
-  margin: 0 auto;
+  background: black;
+  color: white;
+  max-width: 454px;
+  margin: 6px auto;
 `;
 
 const StyledYourTurn = styled.div`
   font-size: 25px;
   text-align: center;
-  background: green;
-  max-width: 450px;
-  margin: 0 auto;
+  background: #b5b6e4;
+  max-width: 454px;
+  margin: 6px auto;
 `;
 
 const StyledWaitingForOpponent = styled.div`
   font-size: 25px;
   text-align: center;
-  background: yellow;
-  max-width: 450px;
-  margin: 0 auto;
+  background: black;
+  max-width: 454px;
+  margin: 6px auto;
+  color: white;
+`;
+
+const StyledYouAre = styled.div`
+  text-align: center;
+  padding: 3px;
 `;
 
 const mapStateToProps = (state: BoardReducerType) => {
@@ -90,10 +98,12 @@ const Main = (props: PropsFromRedux) => {
           props.state.boardReducer.playerState.length === 1 ? 15 : 30
         }
       />
-      {props.state.boardReducer.roomId.length > 0 && (
-        <StyledJoined>
-          Joined game: {props.state.boardReducer.roomId}
-        </StyledJoined>
+
+      {props.state.boardReducer.playerState.length === 2 && (
+        <StyledYouAre>
+          You are:{" "}
+          {showBoardSymbol(socket.id, props.state.boardReducer.playerState)}
+        </StyledYouAre>
       )}
       {props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.activeTurn === socket.id &&
@@ -114,6 +124,11 @@ const Main = (props: PropsFromRedux) => {
       {props.state.boardReducer.playerState.length === 2 &&
         props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.winner.length === 0 && <Board />}
+      {props.state.boardReducer.roomId.length > 0 && (
+        <StyledJoined>
+          Joined game: {props.state.boardReducer.roomId}
+        </StyledJoined>
+      )}
       {props.state.boardReducer.winner.length !== 0 && <PostGameScreen />}
     </StyledMain>
   );

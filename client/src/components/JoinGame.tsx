@@ -1,22 +1,9 @@
 import { connect, ConnectedProps } from "react-redux";
 import { socket } from "../connection/socket";
 import { BoardReducerType } from "../types";
-import styled from "styled-components";
+import { StyledButton } from "../commonComponentStyles";
 import { Dispatch } from "react";
 import { resetTimer } from "../redux/Board/board.actions";
-
-const StyledJoinGameButton = styled.button`
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: white;
-  border: 2px solid black;
-  padding: 15px 32px;
-  font-size: 20px;
-  border-radius: 8px;
-  color: black;
-  cursor: pointer;
-`;
 
 const mapStateToProps = (state: BoardReducerType) => {
   return {
@@ -40,9 +27,14 @@ const JoinGame = (props: PropsFromRedux) => {
   };
   return (
     <div>
-      <StyledJoinGameButton onClick={onJoinGameHandler}>
+      <StyledButton
+        whileHover={{
+          scale: 1.1,
+        }}
+        onClick={onJoinGameHandler}
+      >
         Search for game..
-      </StyledJoinGameButton>
+      </StyledButton>
     </div>
   );
 };

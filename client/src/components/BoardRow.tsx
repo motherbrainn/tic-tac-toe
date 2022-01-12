@@ -1,11 +1,12 @@
 import Box from "./Box";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 interface BoardRowType {
   rowId: number;
 }
 
-const StyledBoardRow = styled.div`
+const StyledBoardRow = styled(motion.div)`
   display: flex;
   justify-content: center;
 `;

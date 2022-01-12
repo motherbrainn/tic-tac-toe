@@ -4,9 +4,15 @@ import { resetState } from "../redux/Board/board.actions";
 import styled from "styled-components";
 import { BoardReducerType } from "../types";
 import { Dispatch } from "react";
+import { StyledButton } from "../commonComponentStyles";
 
 const StyledDiv = styled.div`
   text-align: center;
+`;
+
+const StyledResult = styled.div`
+  text-align: center;
+  padding: 3px;
 `;
 
 const mapStateToProps = (state: BoardReducerType) => {
@@ -31,12 +37,25 @@ export const PostGameScreen = (props: PropsFromRedux) => {
 
   return (
     <StyledDiv>
-      {props.state.boardReducer.winner === socket.id && <div>You won!</div>}
+      {props.state.boardReducer.winner === socket.id && (
+        <StyledResult>You won!</StyledResult>
+      )}
 
       {props.state.boardReducer.winner !== socket.id &&
-        props.state.boardReducer.winner !== "tie" && <div>You lose</div>}
-      {props.state.boardReducer.winner === "tie" && <div>TIE</div>}
-      <button onClick={onQuitToLobby}>Quit to Lobby</button>
+        props.state.boardReducer.winner !== "tie" && (
+          <StyledResult>You lose</StyledResult>
+        )}
+      {props.state.boardReducer.winner === "tie" && (
+        <StyledResult>TIE</StyledResult>
+      )}
+      <StyledButton
+        onClick={onQuitToLobby}
+        whileHover={{
+          scale: 1.1,
+        }}
+      >
+        Quit to Lobby
+      </StyledButton>
     </StyledDiv>
   );
 };
