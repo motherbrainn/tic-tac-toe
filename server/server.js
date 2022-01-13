@@ -57,6 +57,12 @@ io.on("connection", (socket) => {
   });
 });
 
-instrument(io, { auth: false });
+instrument(io, {
+  auth: {
+    type: "basic",
+    username: "admin",
+    password: "$2a$12$dET6r2k5TOQrandMABXbX.55AmrQVKImJr6Ow6JRawehcfZ5VNWUK", // "tictactoe1"
+  },
+});
 
 server.listen(PORT, () => console.log(`Server is connected to port ${PORT}`));
