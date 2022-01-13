@@ -24,30 +24,17 @@ const StyledJoined = styled.div`
   text-align: center;
 `;
 
-const StyledWaiting = styled.div`
+interface StyledStatusBarType {
+  waiting: boolean;
+}
+
+const StyledStatusBar = styled.div<StyledStatusBarType>`
   font-size: 25px;
   text-align: center;
-  background: black;
+  background: ${(props) => (props.waiting ? "black" : "#b5b6e4")};
   color: white;
   max-width: 454px;
   margin: 6px auto;
-`;
-
-const StyledYourTurn = styled.div`
-  font-size: 25px;
-  text-align: center;
-  background: #b5b6e4;
-  max-width: 454px;
-  margin: 6px auto;
-`;
-
-const StyledWaitingForOpponent = styled.div`
-  font-size: 25px;
-  text-align: center;
-  background: black;
-  max-width: 454px;
-  margin: 6px auto;
-  color: white;
 `;
 
 const StyledYouAre = styled.div`
@@ -108,18 +95,20 @@ const Main = (props: PropsFromRedux) => {
       {props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.activeTurn === socket.id &&
         props.state.boardReducer.winner.length === 0 && (
-          <StyledYourTurn>Your turn</StyledYourTurn>
+          <StyledStatusBar waiting={false}>Your turn</StyledStatusBar>
         )}
       {props.state.boardReducer.playerState.length === 2 &&
         props.state.boardReducer.roomId.length > 0 &&
         props.state.boardReducer.activeTurn !== socket.id &&
         props.state.boardReducer.winner.length === 0 && (
-          <StyledWaiting>Waiting for player turn..</StyledWaiting>
+          <StyledStatusBar waiting={true}>
+            Waiting for player turn..
+          </StyledStatusBar>
         )}
       {props.state.boardReducer.playerState.length === 1 && (
-        <StyledWaitingForOpponent>
+        <StyledStatusBar waiting={true}>
           Waiting for opponent to connect..
-        </StyledWaitingForOpponent>
+        </StyledStatusBar>
       )}
       {props.state.boardReducer.playerState.length === 2 &&
         props.state.boardReducer.roomId.length > 0 &&
