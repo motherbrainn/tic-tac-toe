@@ -1,10 +1,11 @@
 import { io } from "socket.io-client";
+import { prodUrl } from "../prodConsts";
 
 const env = process.env.NODE_ENV;
 
 const determineClientSideAddress = (env: string) => {
   if (env === "production") {
-    return "https://tic-tac-toe-vs.herokuapp.com";
+    return prodUrl;
   } else {
     return "http://localhost:8080";
   }

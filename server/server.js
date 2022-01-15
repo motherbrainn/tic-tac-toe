@@ -5,14 +5,18 @@ const getRandomIntInclusive = utils.getRandomIntInclusive;
 const http = require("http");
 const express = require("express");
 const path = require("path");
+const prodConsts = require("../client/src/prodConsts");
+const dashboardPassword = prodConsts.dashboardPassword;
+const dashboardUsername = prodConsts.dashboardUsername;
 
 const app = express();
 const server = http.createServer(app);
 
 const PORT = process.env.PORT || 8080;
+const env = process.env.NODE_ENV;
 
-//This will create a middleware.
-//When you navigate to the root page, it would use the built react-app
+//This will create a middleware
+//When you navigate to the root page it will use the built react-app
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 const io = require("socket.io")(server, {
@@ -57,12 +61,17 @@ io.on("connection", (socket) => {
   });
 });
 
-instrument(io, {
-  auth: {
-    type: "basic",
-    username: "admin",
-    password: "$2a$12$dET6r2k5TOQrandMABXbX.55AmrQVKImJr6Ow6JRawehcfZ5VNWUK", // "tictactoe1"
-  },
-});
+//if enviornment is prod use auth
+env === "production"
+  ? instrument(io, {
+      auth: {
+        type: "basic",
+        username: dashboardUsername,
+        password: dashboardPassword,
+      },
+    })
+  : instrument(io, {
+      auth: false,
+    });
 
 server.listen(PORT, () => console.log(`Server is connected to port ${PORT}`));
